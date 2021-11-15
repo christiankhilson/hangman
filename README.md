@@ -1,2 +1,2 @@
 # hangman
-a fun little hangman game
+hangman game
