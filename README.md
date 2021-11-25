@@ -1,2 +1,2 @@
 # hangman
-hangman game
+hangman game to showcase OOP

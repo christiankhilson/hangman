@@ -15,12 +15,37 @@ namespace Hangman
         public HangmanDrawing HangmanDrawing = new HangmanDrawing();
         public HangmanGame()
         {
-
-            Word = startingWord();
-            GuessCheck(Guess());
+            PickGame();
+  //          Word = StartingWord();
+    //        GuessCheck(Guess());
 
         }
-        private string startingWord()
+        static void PickGame()
+        {
+            Console.WriteLine("Would you like to play Comp guess (1) Person guess (2) or Person vs Person (3)?");
+            string input = Console.ReadLine();
+            if(int.Parse(input) >= 0 && int.Parse(input) <= 2) {
+                switch(int.Parse(input))
+                {
+                    case 0:
+                        ComputerGuess computerGuess = new ComputerGuess();
+                        break;
+
+                    case 1:
+                        HumanGuess humanGuess = new HumanGuess();
+                        break;
+
+                    default:
+                        HumanVHuman humanVHuman = new HumanVHuman();
+                        break;
+                }
+            } 
+            else
+            {
+                PickGame();
+            }
+        }
+        protected string StartingWord()
         {
             string word = "";
             Console.WriteLine("To get started, let's input a word:");
@@ -37,7 +62,7 @@ namespace Hangman
 
             return word;
         }
-        public char Guess()
+        protected char Guess()
         {
             string guessedLetter = "";
             Console.WriteLine("Input a letter:");
@@ -57,7 +82,7 @@ namespace Hangman
 
             return char.Parse(guessedLetter);
         }
-        public void GuessCheck(char guessedLetter)
+        protected void GuessCheck(char guessedLetter)
         {
             if(WordList.Contains(guessedLetter))
             {
@@ -91,14 +116,7 @@ namespace Hangman
                 Guess();
             }
         }
-        public void WordRemains()
-        {
-            for (int i = 0; i < WordIndiv.Length; i++)
-            {
-                Console.Write(WordIndiv[i] + "   ");
-            }
-        }
-        public void EndGame()
+        protected void EndGame()
         {
             string answer = "";
             Console.WriteLine("That's all! Play again? (Y/N)");
@@ -122,7 +140,7 @@ namespace Hangman
 
         }
 
-        public bool IsNotChar(string input)
+        protected bool IsNotChar(string input)
         {
             if (input.Length > 1 || input.Length == 0 || input.Any(char.IsDigit))
                 return true;

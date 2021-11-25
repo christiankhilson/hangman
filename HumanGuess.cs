@@ -8,6 +8,9 @@ namespace Hangman
 {
     internal class HumanGuess : HangmanGame
     {
+        public HumanGuess()
+        {
 
+        }
     }
 }
